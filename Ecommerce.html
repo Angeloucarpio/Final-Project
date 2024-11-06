@@ -13,25 +13,121 @@
             background-attachment: fixed;
             color: #333;
         }
+
+        /* Spinner styling */
+        .spinner {
+            display: none;
+            border: 8px solid #000000;
+            border-top: 8px solid #530000;
+            border-left: 8px solid #00521b;
+            border-right: 8px solid #adc000;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Image styling */
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 150px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Header style */
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .navbar-nav li a {
+            color: white;
+        }
+
+        footer {
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #343a40;
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="text-center" style="padding: 20px; background-color: #343a40; color: white;">
-            <h1>E-commerce Dashboard</h1>
-        </header>
 
-        <div class="alert alert-dismissible fade" id="success-alert" role="alert">
-            <strong id="success-message"></strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+    <!-- Navbar -->
+    <header class="bg-light">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.jpg" alt="Logo" class="d-inline-block align-top" />
+                    My Website
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html" onclick="navigate(event, 'index.html')">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html" onclick="navigate(event, 'contact.html')">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="portfolio.html" onclick="navigate(event, 'portfolio.html')">Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Weather.html" onclick="navigate(event, 'Weather.html')">Weather</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Ecommerce.html" onclick="navigate(event, 'Ecommerce.html')">E-commerce</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
+    </header>
 
-        <div class="row" id="product-list"></div>
-
-        <footer class="text-center" style="padding: 20px; margin-top: 40px; background-color: #343a40; color: white;">
-            <p>Contact Us | Follow Us on Social Media</p>
-        </footer>
+    <!-- Main content -->
+    <div class="container text-center my-5">
+        <!-- Heading -->
+        <h1 class="text-white display-4">
+            E-commerce <span class="text-warning">Dashboard</span>
+        </h1>
+        <!-- Spinner -->
+        <div class="spinner" id="spinner"></div>
     </div>
+
+    <div class="alert alert-dismissible fade" id="success-alert" role="alert">
+        <strong id="success-message"></strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+    </div>
+
+    <!-- Product list -->
+    <div class="row" id="product-list"></div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <p>Contact Us | Follow Us on Social Media</p>
+    </footer>
 
     <script>
         const products = [
@@ -48,7 +144,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">${product.name}</div>
                             <div class="panel-body text-center">
-                                <img src="${product.image}" class="img-responsive center-block" alt="${product.name}" style="height: 150px; object-fit: cover;">
+                                <img src="${product.image}" class="product-image" alt="${product.name}">
                                 <p>Price: $${product.price}</p>
                                 <p>Stock: ${product.stock}</p>
                                 <button class="btn btn-primary add-to-cart" data-id="${product.id}" ${product.stock === 0 ? 'disabled' : ''}>Add to Cart</button>
@@ -84,6 +180,15 @@
             }
         }
 
+        // Show spinner when loading products
+        function showSpinner() {
+            document.getElementById("spinner").style.display = 'block';
+        }
+
+        function hideSpinner() {
+            document.getElementById("spinner").style.display = 'none';
+        }
+
         renderProducts();
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -91,7 +196,11 @@
             addToCartButtons.forEach((button) => {
                 button.addEventListener("click", () => {
                     const productId = button.getAttribute("data-id");
-                    addToCart(productId);
+                    showSpinner();
+                    setTimeout(() => {
+                        addToCart(productId);
+                        hideSpinner();
+                    }, 1000); // Simulating network request
                 });
             });
         });
