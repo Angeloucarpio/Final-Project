@@ -106,7 +106,7 @@
             { id: 2, name: "Headphones", price: 100, stock: 10, image: "headphones.png" },
             { id: 3, name: "Keyboard", price: 50, stock: 20, image: "keyboard.jpg" }
         ];
-
+    
         // Render products
         function renderProducts() {
             let html = '';
@@ -129,22 +129,34 @@
             document.getElementById('product-list').style.display = 'block';
             document.getElementById('spinner').style.display = 'none'; // Hide spinner after products are rendered
         }
-
+    
         // Function to add products to the cart
         function addToCart(productId) {
             const product = products.find((p) => p.id === Number(productId));
             if (product && product.stock > 0) {
-                product.stock--; // Reduce stock by 1
-                // Show success message
-                document.getElementById('success-message').innerText = `${product.name} was added to the cart successfully!`;
-                document.getElementById('success-alert').style.display = 'block';
+                // Show spinner when adding to cart
+                document.getElementById('spinner').style.display = 'block';
+    
+                // Simulate a delay for loading
                 setTimeout(() => {
-                    document.getElementById('success-alert').style.display = 'none'; // Hide the alert after 3 seconds
-                }, 3000);
-                renderProducts(); // Re-render to update stock
+                    product.stock--; // Reduce stock by 1
+                    // Show success message
+                    document.getElementById('success-message').innerText = `${product.name} was added to the cart successfully!`;
+                    document.getElementById('success-alert').style.display = 'block';
+                    
+                    // Hide the alert after 3 seconds
+                    setTimeout(() => {
+                        document.getElementById('success-alert').style.display = 'none';
+                    }, 3000);
+    
+                    renderProducts(); // Re-render products to update stock
+                    document.getElementById('spinner').style.display = 'none'; // Hide the spinner after the action completes
+                }, 1000); // 1-second simulated delay for loading
+            } else {
+                alert("Sorry, this item is out of stock.");
             }
         }
-
+    
         // Event listener for add to cart buttons
         document.addEventListener("DOMContentLoaded", () => {
             const addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -156,7 +168,7 @@
             });
             renderProducts(); // Render products once the page is loaded
         });
-
+    
         // Navigate with spinner
         function navigate(event, url) {
             event.preventDefault();
@@ -166,5 +178,6 @@
             }, 1000); // Simulate delay for spinner visibility
         }
     </script>
+  
 </body>
 </html>
