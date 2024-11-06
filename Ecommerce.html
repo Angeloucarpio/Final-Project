@@ -9,11 +9,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         body {
-            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
-            background-attachment: fixed;
-            color: #333;
+            background-color: gray;
         }
-
         .spinner {
             display: none;
             border: 8px solid #000000;
@@ -27,7 +24,6 @@
             position: relative;
             margin: 20px auto;
         }
-
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -36,45 +32,9 @@
                 transform: rotate(360deg);
             }
         }
-
-        .product-image {
-            max-width: 100%;
-            height: auto;
-            max-height: 150px;
-            object-fit: cover;
-            display: block;
-            margin: 0 auto;
-        }
-
-        footer {
-            padding: 20px;
-            margin-top: 40px;
-            background-color: #343a40;
-            color: white;
-        }
-
-        /* Custom header styling */
-        .navbar {
-            background-color: #f8f9fa;
-        }
-
-        .navbar-nav .nav-item .nav-link {
-            color: #333;
-        }
-
         .navbar-nav .nav-item .nav-link.active {
-            color: #007bff;
+            color: #007bff !important;
         }
-
-        .navbar-toggler-icon {
-            background-color: #333;
-        }
-
-        .navbar-brand img {
-            width: 30px;
-            height: 30px;
-        }
-
     </style>
 </head>
 <body>
@@ -113,24 +73,21 @@
         </div>
     </header>
 
-    <!-- Main content -->
+    <!-- Spinner -->
     <div class="container text-center my-5">
-        <h1 class="text-white display-4">
-            E-commerce <span class="text-warning">Dashboard</span>
-        </h1>
         <div class="spinner" id="spinner"></div>
+        <h1 class="text-white display-4">Welcome to my <span class="text-warning">E-commerce Dashboard</span></h1>
     </div>
 
-    <div class="alert alert-dismissible fade" id="success-alert" role="alert">
-        <strong id="success-message"></strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+    <!-- Product List -->
+    <div class="container" id="product-list" style="display: none;">
+        <div class="row">
+            <!-- Products will be dynamically inserted here -->
+        </div>
     </div>
-
-    <!-- Product list -->
-    <div class="row" id="product-list"></div>
 
     <!-- Footer -->
-    <footer class="text-center">
+    <footer class="text-center" style="padding: 20px; margin-top: 40px; background-color: #343a40; color: white;">
         <p>Contact Us | Follow Us on Social Media</p>
     </footer>
 
@@ -138,18 +95,19 @@
         const products = [
             { id: 1, name: "Laptop", price: 1500, stock: 5, image: "Laptop.png" },
             { id: 2, name: "Headphones", price: 100, stock: 10, image: "headphones.png" },
-            { id: 3, name: "Keyboard", price: 50, stock: 20, image: "keyboard.jpg" },
+            { id: 3, name: "Keyboard", price: 50, stock: 20, image: "keyboard.jpg" }
         ];
 
+        // Render products
         function renderProducts() {
-            let html = "";
+            let html = '';
             products.forEach((product) => {
                 html += `
                     <div class="col-md-4 mb-4">
                         <div class="card">
                             <div class="card-header">${product.name}</div>
                             <div class="card-body text-center">
-                                <img src="${product.image}" class="product-image" alt="${product.name}">
+                                <img src="${product.image}" class="img-fluid" alt="${product.name}" style="max-height: 150px; object-fit: cover;">
                                 <p>Price: $${product.price}</p>
                                 <p>Stock: ${product.stock}</p>
                                 <button class="btn btn-primary add-to-cart" data-id="${product.id}" ${product.stock === 0 ? 'disabled' : ''}>Add to Cart</button>
@@ -158,57 +116,41 @@
                     </div>
                 `;
             });
-            document.getElementById("product-list").innerHTML = html;
+            document.querySelector('#product-list .row').innerHTML = html;
+            document.getElementById('product-list').style.display = 'block';
+            document.getElementById('spinner').style.display = 'none'; // Hide spinner after products are rendered
         }
 
+        // Function to add products to the cart
         function addToCart(productId) {
             const product = products.find((p) => p.id === Number(productId));
             if (product && product.stock > 0) {
-                product.stock--; // Deduct 1 from stock
-                const message = { type: "ADD_TO_CART", product };
-                processMessage(message);
-                renderProducts(); // Re-render products to reflect stock change
+                product.stock--; // Reduce stock by 1
+                alert(`The ${product.name} was added to the cart!`);
+                renderProducts(); // Re-render to update stock
             }
         }
 
-        function processMessage(message) {
-            if (message.type === "ADD_TO_CART") {
-                const productName = message.product.name;
-                document.getElementById("success-message").innerText = `The ${productName} was added to the cart successfully.`;
-                const alert = document.getElementById("success-alert");
-                alert.classList.remove("fade");
-                alert.classList.add("show");
-                setTimeout(() => {
-                    alert.classList.add("fade");
-                    alert.classList.remove("show");
-                }, 3000);
-            }
-        }
-
-        // Show spinner when loading products
-        function showSpinner() {
-            document.getElementById("spinner").style.display = 'block';
-        }
-
-        function hideSpinner() {
-            document.getElementById("spinner").style.display = 'none';
-        }
-
-        renderProducts();
-
+        // Event listener for add to cart buttons
         document.addEventListener("DOMContentLoaded", () => {
-            const addToCartButtons = document.querySelectorAll(".add-to-cart");
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
             addToCartButtons.forEach((button) => {
-                button.addEventListener("click", () => {
-                    const productId = button.getAttribute("data-id");
-                    showSpinner();
-                    setTimeout(() => {
-                        addToCart(productId);
-                        hideSpinner();
-                    }, 1000); // Simulating network request
+                button.addEventListener('click', () => {
+                    const productId = button.getAttribute('data-id');
+                    addToCart(productId);
                 });
             });
+            renderProducts(); // Render products once the page is loaded
         });
+
+        // Navigate with spinner
+        function navigate(event, url) {
+            event.preventDefault();
+            document.getElementById('spinner').style.display = 'block'; // Show spinner
+            setTimeout(() => {
+                window.location.href = url; // Redirect after spinner shows
+            }, 1000); // Simulate delay for spinner visibility
+        }
     </script>
 </body>
 </html>
