@@ -46,6 +46,16 @@
             background-color: #343a40;
             color: white;
         }
+
+        /* Image styling */
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 150px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -118,7 +128,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">${product.name}</div>
                             <div class="panel-body text-center">
-                                <img src="${product.image}" class="img-responsive center-block" alt="${product.name}" style="height: 150px; object-fit: cover;">
+                                <img src="${product.image}" class="product-image" alt="${product.name}">
                                 <p>Price: $${product.price}</p>
                                 <p>Stock: ${product.stock}</p>
                                 <button class="btn btn-primary add-to-cart" data-id="${product.id}" ${product.stock === 0 ? 'disabled' : ''}>Add to Cart</button>
