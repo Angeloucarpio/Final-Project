@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
     <!-- Bootstrap CSS -->
     <link
         rel="stylesheet"
@@ -11,73 +11,47 @@
     />
     <style>
         body {
-            background-color: #f8f9fa;
-            font-family: 'Arial', sans-serif;
+            background-color: gray;
         }
 
-        .header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e0e0e0;
-            padding: 20px 0;
+        .spinner {
+            display: none;
+            border: 8px solid #000000;
+            border-top: 8px solid #530000;
+            border-left: 8px solid #00521b;
+            border-right: 8px solid #adc000;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
         }
 
-        .header .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .hero-section {
-            background: linear-gradient(to right, #f0f4f8, #e9ecef);
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .hero-section h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
-
-        .hero-section p {
-            font-size: 1.2rem;
-            color: #555;
-            margin: 15px 0 30px;
-        }
-
-        .hero-section .btn-primary {
-            font-size: 1rem;
-            padding: 10px 20px;
-        }
-
-        .projects-section h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            border: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer {
-            background-color: #343a40;
-            color: #ffffff;
-            text-align: center;
-            padding: 15px 0;
-        }
-
-        .footer a {
-            color: #ffffff;
-            margin: 0 10px;
-            text-decoration: none;
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
+    <header class="bg-light">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#">Portfolio</a>
+                <a class="navbar-brand" href="index.html">
+                    <img
+                        src="logo.jpg"
+                        alt="Logo"
+                        width="30"
+                        height="30"
+                        class="d-inline-block align-top"
+                    />
+                    Portfolio
+                </a>
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -92,13 +66,49 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#about">About</a>
+                            <a
+                                class="nav-link"
+                                href="index.html"
+                                onclick="navigate(event, 'index.html')"
+                            >
+                                Home
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#projects">Projects</a>
+                            <a
+                                class="nav-link"
+                                href="contact.html"
+                                onclick="navigate(event, 'contact.html')"
+                            >
+                                Contact
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact</a>
+                            <a
+                                class="nav-link"
+                                href="portfolio.html"
+                                onclick="navigate(event, 'portfolio.html')"
+                            >
+                                Portfolio
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="Weather.html"
+                                onclick="navigate(event, 'Weather.html')"
+                            >
+                                Weather
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="Ecommerce.html"
+                                onclick="navigate(event, 'Ecommerce.html')"
+                            >
+                                E-commerce
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -106,70 +116,44 @@
         </div>
     </header>
 
+    <!-- Main Content -->
+    <div class="container text-center my-5">
+        <h1 class="text-white display-4">
+            Welcome to my <span class="text-warning">Portfolio</span>
+        </h1>
+        <div class="spinner" id="spinner"></div>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <h1>Hi, I'm [Your Name]</h1>
-            <p>Designer, developer, and creative thinker exploring the intersection of technology and art.</p>
-            <a href="#projects" class="btn btn-primary">View My Work</a>
-        </div>
-    </section>
+    <div class="container text-center">
+        <img
+            class="img-fluid"
+            src="ME.png"
+            alt="My Picture"
+            style="max-width: 100%; height: auto"
+        />
+    </div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section py-5">
-        <div class="container">
-            <h2 class="text-center">Projects</h2>
-            <div class="row">
-                <!-- Project Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="project1.jpg" class="card-img-top" alt="Project 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Project Title 1</h5>
-                            <p class="card-text">A brief description of the project goes here.</p>
-                            <a href="#" class="btn btn-primary">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="project2.jpg" class="card-img-top" alt="Project 2">
-                        <div class="card-body">
-                            <h5 class="card-title">Project Title 2</h5>
-                            <p class="card-text">A brief description of the project goes here.</p>
-                            <a href="#" class="btn btn-primary">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="project3.jpg" class="card-img-top" alt="Project 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Project Title 3</h5>
-                            <p class="card-text">A brief description of the project goes here.</p>
-                            <a href="#" class="btn btn-primary">View Project</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© 2024 [Your Name]. All rights reserved.</p>
-        <div>
-            <a href="https://github.com">GitHub</a>
-            <a href="https://linkedin.com">LinkedIn</a>
-            <a href="mailto:yourname@example.com">Email</a>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap and JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showSpinner() {
+            document.getElementById("spinner").style.display = "block";
+        }
+
+        function hideSpinner() {
+            document.getElementById("spinner").style.display = "none";
+        }
+
+        function navigate(event, url) {
+            event.preventDefault();
+            showSpinner();
+            setTimeout(() => {
+                window.location.href = url;
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
