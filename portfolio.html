@@ -1,159 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
-    <!-- Bootstrap CSS -->
-    <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <style>
-        body {
-            background-color: gray;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #838383;
+      margin: 0;
+      padding: 0;
+    }
 
-        .spinner {
-            display: none;
-            border: 8px solid #000000;
-            border-top: 8px solid #530000;
-            border-left: 8px solid #00521b;
-            border-right: 8px solid #adc000;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 2s linear infinite;
-            margin: 20px auto;
-        }
+    /* Spinner Styles */
+    .spinner {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 8px solid rgba(0, 0, 0, 0.1);
+      border-top: 8px solid #530000;
+      border-left: 8px solid #00521b;
+      border-right: 8px solid #adc000;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 2s linear infinite;
+      z-index: 1000;
+    }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background-color: white;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: black !important;
+    }
+
+    .navbar-nav .nav-link {
+      font-size: 1rem;
+      color: #555 !important; /* Lighter font color */
+      margin: 0 10px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #333 !important; /* Stronger black for hover */
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      height: 100vh;
+      width: 250px;
+      position: fixed;
+      top: 56px; /* Navbar height */
+      left: 0;
+      background-color: #343a40;
+      color: white;
+      padding-top: 20px;
+    }
+
+    .sidebar a {
+      color: white;
+      display: block;
+      padding: 15px 20px;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      background-color: #495057;
+      color: #ffc107;
+    }
+
+    /* Content Section Styles */
+    .content {
+      margin-left: 250px;
+      margin-top: 56px; /* Navbar height */
+      padding: 20px;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to right, #0066ff, #00ccff);
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .hero img {
+      border-radius: 50%;
+      max-width: 150px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: #222;
+      color: #aaa;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="bg-light">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="index.html">
-                    <img
-                        src="logo.jpg"
-                        alt="Logo"
-                        width="30"
-                        height="30"
-                        class="d-inline-block align-top"
-                    />
-                    Portfolio
-                </a>
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="index.html"
-                                onclick="navigate(event, 'index.html')"
-                            >
-                                Home
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="contact.html"
-                                onclick="navigate(event, 'contact.html')"
-                            >
-                                Contact
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="portfolio.html"
-                                onclick="navigate(event, 'portfolio.html')"
-                            >
-                                Portfolio
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="Weather.html"
-                                onclick="navigate(event, 'Weather.html')"
-                            >
-                                Weather
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="Ecommerce.html"
-                                onclick="navigate(event, 'Ecommerce.html')"
-                            >
-                                E-commerce
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
+  <!-- Spinner -->
+  <div class="spinner" id="spinner"></div>
 
-    <!-- Main Content -->
-    <div class="container text-center my-5">
-        <h1 class="text-white display-4">
-            Welcome to my <span class="text-warning">Portfolio</span>
-        </h1>
-        <div class="spinner" id="spinner"></div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <a class="navbar-brand" href="#">
+      <img src="logo.jpg" alt="Logo" width="30" height="30" class="d-inline-block align-top"> Portfolio
+    </a>
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-toggle="collapse" 
+      data-target="#navbarNav" 
+      aria-controls="navbarNav" 
+      aria-expanded="false" 
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html" onclick="navigate(event, 'index.html')">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html" onclick="navigate(event, 'contact.html')">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="portfolio.html" onclick="navigate(event, 'portfolio.html')">Portfolio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Weather.html" onclick="navigate(event, 'Weather.html')">Weather</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Ecommerce.html" onclick="navigate(event, 'Ecommerce.html')">E-commerce</a>
+        </li>
+      </ul>
     </div>
+  </nav>
 
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
     <!-- Hero Section -->
-    <div class="container text-center">
-        <img
-            class="img-fluid"
-            src="ME.png"
-            alt="My Picture"
-            style="max-width: 100%; height: auto"
-        />
+    <div id="hero" class="hero">
+      <img src="ME.png" alt="Angelou Carpio">
+      <h1>Hello, I'm Angelou Carpio</h1>
+      <p>IT Student passionate about software development, web design, and technology solutions.</p>
     </div>
 
-    <!-- Bootstrap and JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function showSpinner() {
-            document.getElementById("spinner").style.display = "block";
-        }
+    <!-- About Section -->
+    <section id="about" class="container">
+      <h2>About Me</h2>
+      <p>
+        I am an IT student specializing in web development and software engineering. My focus is on building creative and efficient solutions to complex problems. I enjoy exploring new technologies and improving my skills through hands-on projects.
+      </p>
+    </section>
 
-        function hideSpinner() {
-            document.getElementById("spinner").style.display = "none";
-        }
+    <!-- Projects Section -->
+    <section id="projects" class="container">
+      <h2>My Projects</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="project-card">
+            <h5>Flag Quiz Game</h5>
+            <p>A trivia game that challenges users to identify flags from different countries. Built with JavaScript and Firebase.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="project-card">
+            <h5>Weather App</h5>
+            <p>A web app that displays real-time weather information using OpenWeather API. Fully responsive and interactive.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="project-card">
+            <h5>E-commerce Website</h5>
+            <p>A dynamic e-commerce platform with product browsing, cart functionality, and secure payment integration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        function navigate(event, url) {
-            event.preventDefault();
-            showSpinner();
-            setTimeout(() => {
-                window.location.href = url;
-            }, 1000);
-        }
-    </script>
+    <!-- Education Section -->
+    <section id="education" class="container">
+      <h2>Education</h2>
+      <p>Bachelor of Science in Information Technology (Ongoing)</p>
+      <p>Specialization: Web Development and Software Engineering</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:angelou.carpio@example.com">angelou.carpio@example.com</a></p>
+      <p>LinkedIn: <a href="#">linkedin.com/in/angeloucarpio</a></p>
+      <p>GitHub: <a href="#">github.com/angeloucarpio</a></p>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 Angelou Carpio. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function navigate(event, url) {
+      event.preventDefault();
+      document.getElementById('spinner').style.display = 'block'; // Show spinner
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000); // Simulate loading time
+    }
+  </script>
 </body>
 </html>
