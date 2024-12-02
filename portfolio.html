@@ -5,139 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    /* General Styles */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #838383;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Spinner Styles */
-    .spinner {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border: 8px solid rgba(0, 0, 0, 0.1);
-      border-top: 8px solid #530000;
-      border-left: 8px solid #00521b;
-      border-right: 8px solid #adc000;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 2s linear infinite;
-      z-index: 1000;
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* Navbar Styles */
-    .navbar {
-      background-color: white;
-    }
-
-    .navbar-brand {
-      font-weight: bold;
-      font-size: 1.5rem;
-      color: black !important;
-    }
-
-    .navbar-nav .nav-link {
-      font-size: 1rem;
-      color: #555 !important; /* Lighter font color */
-      margin: 0 10px;
-    }
-
-    .navbar-nav .nav-link:hover {
-      color: #333 !important; /* Stronger black for hover */
-    }
-
-    /* Sidebar Styles */
-    .sidebar {
-      height: 100vh;
-      width: 250px;
-      position: fixed;
-      top: 56px; /* Navbar height */
-      left: 0;
-      background-color: #343a40;
-      color: white;
-      padding-top: 20px;
-    }
-
-    .sidebar a {
-      color: white;
-      display: block;
-      padding: 15px 20px;
-      text-decoration: none;
-    }
-
-    .sidebar a:hover {
-      background-color: #495057;
-      color: #ffc107;
-    }
-
-    /* Content Section Styles */
-    .content {
-      margin-left: 250px;
-      margin-top: 56px; /* Navbar height */
-      padding: 20px;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(to right, #0066ff, #00ccff);
-      color: white;
-      text-align: center;
-      padding: 50px 20px;
-    }
-
-    .hero img {
-      border-radius: 50%;
-      max-width: 150px;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      font-weight: bold;
-    }
-
-    /* Footer Styles */
-    footer {
-      background-color: #222;
-      color: #aaa;
-      text-align: center;
-      padding: 20px;
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for Icons -->
 </head>
 <body>
   <!-- Spinner -->
-  <div class="spinner" id="spinner"></div>
+  <div class="spinner-border text-primary" role="status" id="spinner" style="display:none;">
+    <span class="sr-only">Loading...</span>
+  </div>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-    <a class="navbar-brand" href="#">
-      <img src="logo.jpg" alt="Logo" width="30" height="30" class="d-inline-block align-top"> Portfolio
-    </a>
-    <button 
-      class="navbar-toggler" 
-      type="button" 
-      data-toggle="collapse" 
-      data-target="#navbarNav" 
-      aria-controls="navbarNav" 
-      aria-expanded="false" 
-      aria-label="Toggle navigation">
+  <!-- Navbar (Top) -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: white;">
+    <a class="navbar-brand" href="#">Portfolio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -161,22 +40,29 @@
     </div>
   </nav>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <a href="#hero">Home</a>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
+  <!-- Sidebar (Left) -->
+  <div class="sidebar bg-dark text-white p-3 d-none d-md-block" style="height: 100vh; position: fixed; top: 56px; left: 0; width: 200px;">
+    <!-- Social Media Links -->
+    <div class="mt-5">
+      <a href="https://www.instagram.com/simply_gelou/" target="_blank" class="text-white d-block mb-3">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://www.facebook.com/Carpio.Angelou" target="_blank" class="text-white d-block mb-3">
+        <i class="fab fa-facebook"></i> Facebook
+      </a>
+      <a href="https://myaccount.google.com/u/1/?hl=en&utm_source=OGB&utm_medium=act&gar=WzJd&pli=1" target="_blank" class="text-white d-block">
+        <i class="fab fa-google"></i> Google
+      </a>
+    </div>
   </div>
 
   <!-- Content -->
-  <div class="content">
+  <div class="content" style="margin-left: 220px;"> <!-- Added margin to prevent overlap with the sidebar -->
     <!-- Hero Section -->
-    <div id="hero" class="hero">
-      <img src="ME.png" alt="Angelou Carpio">
-      <h1>Hello, I'm Angelou Carpio</h1>
-      <p>IT Student passionate about software development, web design, and technology solutions.</p>
+    <div id="hero" class="hero text-center py-5" style="background: linear-gradient(to right, #0066ff, #00ccff);">
+      <img src="ME.png" alt="Angelou Carpio" class="rounded-circle mb-3" style="max-width: 150px;">
+      <h1 class="display-4 text-white">Hello, I'm Angelou Carpio</h1>
+      <p class="lead text-white">IT Student passionate about software development, web design, and technology solutions.</p>
     </div>
 
     <!-- About Section -->
@@ -229,20 +115,20 @@
   </div>
 
   <!-- Footer -->
-  <footer>
+  <footer class="bg-dark text-white text-center py-4">
     <p>© 2024 Angelou Carpio. All Rights Reserved.</p>
   </footer>
 
+  <!-- Bootstrap JS and dependencies -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Custom Navigate Function -->
   <script>
-    function navigate(event, url) {
+    function navigate(event, target) {
       event.preventDefault();
-      document.getElementById('spinner').style.display = 'block'; // Show spinner
-      setTimeout(() => {
-        window.location.href = url;
-      }, 1000); // Simulate loading time
+      window.location.href = target;
     }
   </script>
 </body>
